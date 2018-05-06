@@ -1,6 +1,6 @@
 {
   "name": "react-leaflet-polyline",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Leaflet Polyline Component for React Leaflet",
   "peerDependencies": {
     "react": "16.x"

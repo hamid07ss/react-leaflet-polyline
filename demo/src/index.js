@@ -15,7 +15,7 @@ class Demo extends React.Component {
     render() {
         return <div style={{height: 500, width: '100%'}}>
             <h1>React-Leaflet-Draw example</h1>
-            <Map center={[45.9205, 0.4394]} zoom={7} zoomControl={false} style={{height: 500, width: '100%'}}>
+            <Map center={[45.9205, 0.9228]} zoom={9} zoomControl={false} style={{height: 500, width: '100%'}}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
