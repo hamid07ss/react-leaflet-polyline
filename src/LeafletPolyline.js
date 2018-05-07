@@ -43,6 +43,6 @@ export default class LeafletPolyline extends reactPoly {
                 patterns: pat
             }
         );
-        return Leaflet.layerGroup([layer, line]);
+        return Leaflet.layerGroup([line, layer]);
     }
 }
