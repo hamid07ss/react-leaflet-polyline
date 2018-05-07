@@ -1,4 +1,4 @@
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import Leaflet from "leaflet";
 import {Layer} from "leaflet";
 import "leaflet-polylinedecorator";
@@ -8,12 +8,25 @@ import {Polyline as reactPoly} from 'react-leaflet'
 export default class LeafletPolyline extends reactPoly {
     static defaultProps = {
         color: '#3042ff',
-        patterns: [
+    };
+
+    static propTypes = {
+        color: PropTypes.string,
+        patterns: PropTypes.array,
+        positions: PropTypes.array.isRequired
+    };
+
+    createLeafletElement(props) {
+        this.leafletElement = Layer;
+
+        const {positions} = props;
+        let line = Leaflet.polyline(positions);
+        let pat = this.props.patterns || [
             {
                 offset: '10%',
                 endOffset: '60%',
                 repeat: '10%',
-                symbol: L.Symbol.arrowHead({
+                symbol: Leaflet.Symbol.arrowHead({
                     pixelSize: 15,
                     pathOptions: {
                         stroke: true,
@@ -23,36 +36,13 @@ export default class LeafletPolyline extends reactPoly {
                     }
                 })
             }
-        ]
-    };
-
-    static propTypes = {
-        color: propTypes.string,
-        patterns: propTypes.array,
-        positions: propTypes.array.isRequired
-    };
-
-    componentDidMount(props) {
-        this.createLeafletElement(this.props);
-    }
-
-    createLeafletElement(props) {
-        this.leafletElement = Layer;
-
-        const {positions} = props;
-        let line = Leaflet.polyline(positions);
-
+        ];
         let layer = Leaflet.polylineDecorator(
             positions,
             {
-                patterns: this.props.patterns
+                patterns: pat
             }
         );
-
-        this.context.layerContainer.addLayer(line);
-        this.context.layerContainer.addLayer(layer);
-    }
-
-    updateLeafletElement(fromProps, toProps) {
+        return Leaflet.layerGroup([layer, line]);
     }
 }
